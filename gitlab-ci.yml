@@ -1,0 +1,19 @@
+image: docker:latest
+
+variables:
+  DOCKER_HOST: tcp://docker:2375/
+  DOCKER_DRIVER: overlay2
+  DOCKER_TLS_CERTDIR: ""
+
+services:
+  - docker:dind
+
+stages:
+  - build
+
+build:
+  stage: build
+  script:
+    - docker login -u prahasgr -p 123456789s
+    - docker-compose build
+    - docker-compose push
